@@ -3,8 +3,8 @@ import 'calculator/bmi.dart';
 import 'calculator/bmr.dart';
 import 'calculator/tdee.dart';
 import 'calculator/history.dart';
-import 'drawer_items.dart';
 import 'routes.dart';
+import 'appdrawer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,12 +24,7 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('Calculator'),
         ),
-        drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: DrawerItems.buildDrawerItems(context),
-          ),
-        ),
+        drawer: const AppDrawer(),
         body: BMIScreen(),
       ),
     );
