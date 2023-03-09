@@ -3,6 +3,7 @@ import 'calculator/bmi.dart';
 import 'calculator/bmr.dart';
 import 'calculator/tdee.dart';
 import 'calculator/history.dart';
+import 'routes.dart';
 
 class DrawerItems {
   static List<Widget> buildDrawerItems(BuildContext context) {
@@ -18,6 +19,7 @@ class DrawerItems {
         leading: Icon(Icons.calculate),
         title: Text('BMR Calculator'),
         onTap: () {
+          Navigator.pop(context);
           Navigator.pushNamed(context, BMRScreen.routeName);
         },
       ),
@@ -25,6 +27,7 @@ class DrawerItems {
         leading: Icon(Icons.calculate),
         title: Text('TDEE Calculator'),
         onTap: () {
+          Navigator.pop(context);
           Navigator.pushNamed(context, TDEEScreen.routeName);
         },
       ),
@@ -32,6 +35,7 @@ class DrawerItems {
         leading: Icon(Icons.history),
         title: Text('History'),
         onTap: () {
+          Navigator.pop(context);
           Navigator.pushNamed(context, HistoryScreen.routeName);
         },
       ),

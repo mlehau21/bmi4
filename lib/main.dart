@@ -4,6 +4,7 @@ import 'calculator/bmr.dart';
 import 'calculator/tdee.dart';
 import 'calculator/history.dart';
 import 'drawer_items.dart';
+import 'routes.dart';
 
 void main() {
   runApp(const MyApp());
