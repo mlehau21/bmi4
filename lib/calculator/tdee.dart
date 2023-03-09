@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-class TDEEScreen extends StatefulWidget {
-  @override
-  _TDEEScreenState createState() => _TDEEScreenState();
-}
+class TDEEScreen extends StatelessWidget {
+  const TDEEScreen({Key? key}) : super(key: key);
 
-class _TDEEScreenState extends State<TDEEScreen> {
+  static const routeName = '/tdee';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +12,7 @@ class _TDEEScreenState extends State<TDEEScreen> {
         title: Text('TDEE Calculator'),
       ),
       body: Center(
-        child: Text('TDEE Screen'),
+        child: Text('TDEE Calculator Screen'),
       ),
     );
   }

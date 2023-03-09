@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-class BMIScreen extends StatefulWidget {
-  @override
-  _BMIScreenState createState() => _BMIScreenState();
-}
+class BMIScreen extends StatelessWidget {
+  const BMIScreen({Key? key}) : super(key: key);
 
-class _BMIScreenState extends State<BMIScreen> {
+  static const routeName = '/bmi';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +12,7 @@ class _BMIScreenState extends State<BMIScreen> {
         title: Text('BMI Calculator'),
       ),
       body: Center(
-        child: Text('BMI Screen'),
+        child: Text('BMI Calculator Screen'),
       ),
     );
   }

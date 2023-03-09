@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-class BMRScreen extends StatefulWidget {
-  @override
-  _BMRScreenState createState() => _BMRScreenState();
-}
+class BMRScreen extends StatelessWidget {
+  const BMRScreen({Key? key}) : super(key: key);
 
-class _BMRScreenState extends State<BMRScreen> {
+  static const routeName = '/bmr';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +12,7 @@ class _BMRScreenState extends State<BMRScreen> {
         title: Text('BMR Calculator'),
       ),
       body: Center(
-        child: Text('BMR Screen'),
+        child: Text('BMR Calculator Screen'),
       ),
     );
   }
