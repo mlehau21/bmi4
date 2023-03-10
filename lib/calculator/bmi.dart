@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../appdrawer.dart';
 
 class BMIScreen extends StatelessWidget {
   const BMIScreen({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class BMIScreen extends StatelessWidget {
       body: Center(
         child: Text('BMI Calculator Screen'),
       ),
+      drawer: const AppDrawer(),
     );
   }
 }

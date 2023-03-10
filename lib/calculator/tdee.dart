@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../appdrawer.dart';
 
 class TDEEScreen extends StatelessWidget {
   const TDEEScreen({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class TDEEScreen extends StatelessWidget {
       body: Center(
         child: Text('TDEE Calculator Screen'),
       ),
+      drawer: const AppDrawer(),
     );
   }
 }

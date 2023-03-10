@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../appdrawer.dart';
 
 class HistoryScreen extends StatelessWidget {
   const HistoryScreen({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class HistoryScreen extends StatelessWidget {
       body: Center(
         child: Text('History Calculator Screen'),
       ),
+      drawer: const AppDrawer(),
     );
   }
 }

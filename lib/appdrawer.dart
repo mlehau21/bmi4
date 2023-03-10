@@ -8,49 +8,59 @@ class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      child: Column(
-        children: <Widget>[
-          AppBar(
-            title: const Text('Hello Friend'),
-            automaticallyImplyLeading: false,
+  Widget build(BuildContext context) => Drawer(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              buildHeader(context),
+              buildMenuItems(context),
+            ],
           ),
-          const Divider(),
+        ),
+      );
+  Widget buildHeader(BuildContext context) => Container(
+        padding: EdgeInsets.only(
+          top: MediaQuery.of(context).padding.top,
+        ),
+      );
+  Widget buildMenuItems(BuildContext context) => Container(
+      padding: const EdgeInsets.all(24),
+      child: Wrap(
+        runSpacing: 16,
+        children: [
           ListTile(
-            leading: const Icon(Icons.payment),
-            title: const Text('Tính BMI'),
-            onTap: () {
-              Navigator.of(context).pushReplacementNamed(BMIScreen.routeName);
-            },
-          ),
-          const Divider(),
+              leading: const Icon(Icons.calculate),
+              title: const Text('BMI'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const BMIScreen()));
+              }),
           ListTile(
-            leading: const Icon(Icons.edit),
-            title: const Text('Tính BMR'),
-            onTap: () {
-              Navigator.of(context).pushReplacementNamed(BMRScreen.routeName);
-            },
-          ),
-          const Divider(),
+              leading: const Icon(Icons.calculate),
+              title: const Text('BMR'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const BMRScreen()));
+              }),
           ListTile(
-            leading: const Icon(Icons.edit),
-            title: const Text('Tính TDEE'),
-            onTap: () {
-              Navigator.of(context).pushReplacementNamed(TDEEScreen.routeName);
-            },
-          ),
-          const Divider(),
+              leading: const Icon(Icons.calculate),
+              title: const Text('TDEE'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const TDEEScreen()));
+              }),
           ListTile(
-            leading: const Icon(Icons.edit),
-            title: const Text('Xem lịch sử'),
-            onTap: () {
-              Navigator.of(context)
-                  .pushReplacementNamed(HistoryScreen.routeName);
-            },
-          ),
+              leading: const Icon(Icons.history),
+              title: const Text('Lịch sử'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const HistoryScreen()));
+              })
         ],
-      ),
-    );
-  }
+      ));
 }
