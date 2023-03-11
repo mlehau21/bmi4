@@ -3,6 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
 class HistoryScreen extends StatefulWidget {
+  const HistoryScreen({Key? key}) : super(key: key);
+
   @override
   _HistoryScreenState createState() => _HistoryScreenState();
 }
@@ -13,13 +15,13 @@ class _HistoryScreenState extends State<HistoryScreen> {
   @override
   void initState() {
     super.initState();
-    _loadCalcHistory();
+    _loadCalculationHistory();
   }
 
-  void _loadCalcHistory() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> historyStringList = prefs.getStringList('calcHistory') ?? [];
-
+  Future<void> _loadCalculationHistory() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final List<String> historyStringList =
+        prefs.getStringList('calcHistory') ?? [];
     setState(() {
       _calcHistory = historyStringList
           .map((historyString) =>
