@@ -66,120 +66,121 @@ class _TDEEScreenState extends State<TDEEScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('TDEE Calculator'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            TextField(
-              controller: _weightController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: 'Weight (kg)'),
-            ),
-            SizedBox(height: 10),
-            TextField(
-              controller: _heightController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: 'Height (cm)'),
-            ),
-            SizedBox(height: 10),
-            TextField(
-              controller: _ageController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: 'Age (years)'),
-            ),
-            SizedBox(height: 10),
-            Text('Gender:'),
-            Row(
-              children: [
-                Expanded(
-                  child: RadioListTile(
-                    title: Text('Male'),
-                    value: true,
-                    groupValue: _isMale,
-                    onChanged: (value) {
-                      setState(() {
-                        _isMale = value!;
-                      });
-                    },
-                  ),
-                ),
-                Expanded(
-                  child: RadioListTile(
-                    title: Text('Female'),
-                    value: false,
-                    groupValue: _isMale,
-                    onChanged: (value) {
-                      setState(() {
-                        _isMale = value!;
-                      });
-                    },
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 10),
-            Text('Physical Activity Level:'),
-            DropdownButton(
-              value: _activityLevel,
-              items: [
-                DropdownMenuItem(
-                  child: Text('Sedentary'),
-                  value: 1.2,
-                ),
-                DropdownMenuItem(
-                  child: Text('Lightly Active'),
-                  value: 1.375,
-                ),
-                DropdownMenuItem(
-                  child: Text('Moderately Active'),
-                  value: 1.55,
-                ),
-                DropdownMenuItem(
-                  child: Text('Very Active'),
-                  value: 1.725,
-                ),
-                DropdownMenuItem(
-                  child: Text('Extremely Active'),
-                  value: 1.9,
-                ),
-              ],
-              onChanged: (value) {
-                setState(() {
-                  _activityLevel = value as double;
-                });
-              },
-            ),
-            SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: _calculateTDEE,
-              child: Text('Calculate'),
-            ),
-            SizedBox(height: 20),
-            if (_tdeeResult != null)
-              Column(
-                children: [
-                  Text(
-                    'Your TDEE is:',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    '${_tdeeResult.toStringAsFixed(2)} calories/day',
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-          ],
+        appBar: AppBar(
+          title: Text('TDEE Calculator'),
         ),
-      ),
-      drawer: const AppDrawer(),
-    );
+        drawer: const AppDrawer(),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                TextField(
+                  controller: _weightController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(labelText: 'Weight (kg)'),
+                ),
+                SizedBox(height: 10),
+                TextField(
+                  controller: _heightController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(labelText: 'Height (cm)'),
+                ),
+                SizedBox(height: 10),
+                TextField(
+                  controller: _ageController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(labelText: 'Age (years)'),
+                ),
+                SizedBox(height: 10),
+                Text('Gender:'),
+                Row(
+                  children: [
+                    Expanded(
+                      child: RadioListTile(
+                        title: Text('Male'),
+                        value: true,
+                        groupValue: _isMale,
+                        onChanged: (value) {
+                          setState(() {
+                            _isMale = value!;
+                          });
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: RadioListTile(
+                        title: Text('Female'),
+                        value: false,
+                        groupValue: _isMale,
+                        onChanged: (value) {
+                          setState(() {
+                            _isMale = value!;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10),
+                Text('Physical Activity Level:'),
+                DropdownButton(
+                  value: _activityLevel,
+                  items: [
+                    DropdownMenuItem(
+                      child: Text('Sedentary'),
+                      value: 1.2,
+                    ),
+                    DropdownMenuItem(
+                      child: Text('Lightly Active'),
+                      value: 1.375,
+                    ),
+                    DropdownMenuItem(
+                      child: Text('Moderately Active'),
+                      value: 1.55,
+                    ),
+                    DropdownMenuItem(
+                      child: Text('Very Active'),
+                      value: 1.725,
+                    ),
+                    DropdownMenuItem(
+                      child: Text('Extremely Active'),
+                      value: 1.9,
+                    ),
+                  ],
+                  onChanged: (value) {
+                    setState(() {
+                      _activityLevel = value as double;
+                    });
+                  },
+                ),
+                SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: _calculateTDEE,
+                  child: Text('Calculate'),
+                ),
+                SizedBox(height: 20),
+                if (_tdeeResult != null)
+                  Column(
+                    children: [
+                      Text(
+                        'Your TDEE is:',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        '${_tdeeResult.toStringAsFixed(2)} calories/day',
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+              ],
+            ),
+          ),
+        ));
   }
 }
