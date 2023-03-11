@@ -17,6 +17,15 @@ class _TDEEScreenState extends State<TDEEScreen> {
   double _tdeeResult = 0;
   bool _isMale = true;
   double _activityLevel = 1.2;
+  String _selectedActivityLevel = 'Ít vận động';
+
+  List<String> _activityLevels = [
+    'Ít vận động',
+    'Vận động nhẹ',
+    'Vận động vừa',
+    'Vận động nhiều',
+    'Vận động cực nhiều',
+  ];
 
   void _calculateTDEE() {
     final weight = double.parse(_weightController.text);
@@ -29,6 +38,24 @@ class _TDEEScreenState extends State<TDEEScreen> {
       bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
     } else {
       bmr = (10 * weight) + (6.25 * height) - (5 * age) - 161;
+    }
+
+    switch (_selectedActivityLevel) {
+      case 'Ít vận động':
+        _activityLevel = 1.2;
+        break;
+      case 'Vận động nhẹ':
+        _activityLevel = 1.375;
+        break;
+      case 'Vận động vừa':
+        _activityLevel = 1.55;
+        break;
+      case 'Vận động nhiều':
+        _activityLevel = 1.725;
+        break;
+      case 'Vận động cực nhiều':
+        _activityLevel = 1.9;
+        break;
     }
 
     _tdeeResult = bmr * _activityLevel;
@@ -96,17 +123,35 @@ class _TDEEScreenState extends State<TDEEScreen> {
             ),
             SizedBox(height: 10),
             Text('Physical Activity Level:'),
-            Slider(
+            DropdownButton(
               value: _activityLevel,
-              min: 1.2,
-              max: 2.4,
-              divisions: 12,
+              items: [
+                DropdownMenuItem(
+                  child: Text('Sedentary'),
+                  value: 1.2,
+                ),
+                DropdownMenuItem(
+                  child: Text('Lightly Active'),
+                  value: 1.375,
+                ),
+                DropdownMenuItem(
+                  child: Text('Moderately Active'),
+                  value: 1.55,
+                ),
+                DropdownMenuItem(
+                  child: Text('Very Active'),
+                  value: 1.725,
+                ),
+                DropdownMenuItem(
+                  child: Text('Extremely Active'),
+                  value: 1.9,
+                ),
+              ],
               onChanged: (value) {
                 setState(() {
-                  _activityLevel = value;
+                  _activityLevel = value as double;
                 });
               },
-              label: _activityLevel.toStringAsFixed(1),
             ),
             SizedBox(height: 10),
             ElevatedButton(
