@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../appdrawer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:intl/intl.dart';
 
 class HistoryPage extends StatefulWidget {
   @override
@@ -28,7 +29,7 @@ class _HistoryPageState extends State<HistoryPage> {
           final parts = _results[index].split('|');
           final type = parts[0];
           final result = parts[1];
-          final date = parts[2];
+          final date = DateFormat("dd/MM/yyyy").format(DateTime.now());
           return ListTile(
             title: Text('$type: $result'),
             subtitle: Text(date),
