@@ -179,7 +179,8 @@ class _TDEEScreenState extends State<TDEEScreen> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          _saveResult('TDEE', _tdeeResult.toString());
+                          _saveResult('TDEE',
+                              _tdeeResult.toStringAsFixed(2).toString());
                         },
                         child: const Text('Lưu'),
                       ),

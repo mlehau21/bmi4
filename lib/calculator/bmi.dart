@@ -56,7 +56,7 @@ class _BMIScreenState extends State<BMIScreen> {
           ),
           ElevatedButton(
             onPressed: () {
-              _saveResult('BMI', _bmiResult.toString());
+              _saveResult('BMI', _bmiResult.toStringAsFixed(2).toString());
             },
             child: const Text('Lưu'),
           ),

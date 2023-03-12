@@ -91,7 +91,7 @@ class _BMRScreenState extends State<BMRScreen> {
           ),
           ElevatedButton(
             onPressed: () {
-              _saveResult('BMR', _bmrResult.toString());
+              _saveResult('BMR', _bmrResult.toStringAsFixed(2).toString());
             },
             child: const Text('Lưu'),
           ),
