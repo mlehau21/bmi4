@@ -30,9 +30,24 @@ class _HistoryPageState extends State<HistoryPage> {
           final type = parts[0];
           final result = parts[1];
           final date = DateFormat("dd/MM/yyyy").format(DateTime.now());
-          return ListTile(
-            title: Text('$type: $result'),
-            subtitle: Text(date),
+          return Dismissible(
+            background: Container(
+              color: Colors.red,
+              child: Icon(Icons.delete, color: Colors.white),
+              alignment: Alignment.centerRight,
+              padding: EdgeInsets.only(right: 20),
+            ),
+            key: Key(_results[index]),
+            onDismissed: (direction) {
+              setState(() {
+                _results.removeAt(index);
+                _saveResults();
+              });
+            },
+            child: ListTile(
+              title: Text('$type: $result'),
+              subtitle: Text(date),
+            ),
           );
         },
       ),
@@ -45,5 +60,10 @@ class _HistoryPageState extends State<HistoryPage> {
       _results = prefs.getStringList('results') ?? [];
       _results.sort((a, b) => b.split('|')[2].compareTo(a.split('|')[2]));
     });
+  }
+
+  Future<void> _saveResults() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setStringList('results', _results);
   }
 }
