@@ -91,7 +91,7 @@ class _BMRScreenState extends State<BMRScreen> {
           ),
           ElevatedButton(
             onPressed: () {
-              _saveResult('BMI', _bmrResult.toString());
+              _saveResult('BMR', _bmrResult.toString());
             },
             child: const Text('Lưu'),
           ),
@@ -106,5 +106,11 @@ class _BMRScreenState extends State<BMRScreen> {
     final key = 'results';
     final value = '$type|$result|${DateTime.now()}';
     prefs.setStringList(key, [...prefs.getStringList(key) ?? [], value]);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Đã lưu'),
+        duration: Duration(milliseconds: 1500),
+      ),
+    );
   }
 }

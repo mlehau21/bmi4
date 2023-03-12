@@ -71,5 +71,11 @@ class _BMIScreenState extends State<BMIScreen> {
     final key = 'results';
     final value = '$type|$result|${DateTime.now()}';
     prefs.setStringList(key, [...prefs.getStringList(key) ?? [], value]);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Đã lưu'),
+        duration: Duration(milliseconds: 1500),
+      ),
+    );
   }
 }

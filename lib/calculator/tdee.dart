@@ -179,7 +179,7 @@ class _TDEEScreenState extends State<TDEEScreen> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          _saveResult('BMI', _tdeeResult.toString());
+                          _saveResult('TDEE', _tdeeResult.toString());
                         },
                         child: const Text('Lưu'),
                       ),
@@ -196,5 +196,11 @@ class _TDEEScreenState extends State<TDEEScreen> {
     final key = 'results';
     final value = '$type|$result|${DateTime.now()}';
     prefs.setStringList(key, [...prefs.getStringList(key) ?? [], value]);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Đã lưu'),
+        duration: Duration(milliseconds: 1500),
+      ),
+    );
   }
 }
