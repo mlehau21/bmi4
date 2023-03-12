@@ -1,21 +1,47 @@
 import 'package:flutter/material.dart';
 import '../appdrawer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class HistoryScreen extends StatelessWidget {
-  const HistoryScreen({Key? key}) : super(key: key);
+class HistoryPage extends StatefulWidget {
+  @override
+  _HistoryPageState createState() => _HistoryPageState();
+}
 
-  static const routeName = '/history';
+class _HistoryPageState extends State<HistoryPage> {
+  List<String> _results = [];
+
+  @override
+  void initState() {
+    _loadResults();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('History Calculator'),
+        title: const Text('Lịch sử tính toán'),
       ),
-      body: Center(
-        child: Text('History Calculator Screen'),
+      body: ListView.builder(
+        itemCount: _results.length,
+        itemBuilder: (BuildContext context, int index) {
+          final parts = _results[index].split('|');
+          final type = parts[0];
+          final result = parts[1];
+          final date = parts[2];
+          return ListTile(
+            title: Text('$type: $result'),
+            subtitle: Text(date),
+          );
+        },
       ),
-      drawer: const AppDrawer(),
     );
+  }
+
+  Future<void> _loadResults() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _results = prefs.getStringList('results') ?? [];
+    });
   }
 }

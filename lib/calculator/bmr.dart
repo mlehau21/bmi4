@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../appdrawer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BMRScreen extends StatefulWidget {
   const BMRScreen({Key? key}) : super(key: key);
@@ -88,9 +89,22 @@ class _BMRScreenState extends State<BMRScreen> {
             'Chỉ số BMR của bạn là: ${_bmrResult.toStringAsFixed(2)}',
             style: TextStyle(fontSize: 24),
           ),
+          ElevatedButton(
+            onPressed: () {
+              _saveResult('BMI', _bmrResult.toString());
+            },
+            child: const Text('Lưu'),
+          ),
         ],
       ),
       drawer: const AppDrawer(),
     );
+  }
+
+  void _saveResult(String type, String result) async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'results';
+    final value = '$type|$result|${DateTime.now()}';
+    prefs.setStringList(key, [...prefs.getStringList(key) ?? [], value]);
   }
 }

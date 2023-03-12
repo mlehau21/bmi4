@@ -30,4 +30,14 @@ class SharedPreferencesUtils {
         jsonEncode(calculations.map((e) => e.toMap()).toList());
     prefs.setString('calculations', encodedCalculations);
   }
+
+  void _saveResult(String type, String result) async {
+    final prefs = await SharedPreferences.getInstance();
+    final date = DateTime.now();
+    final dateString = '${date.day}/${date.month}/${date.year}';
+    final results = prefs.getStringList('results') ?? [];
+
+    results.add('$type|$result|$dateString');
+    prefs.setStringList('results', results);
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../appdrawer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TDEEScreen extends StatefulWidget {
   const TDEEScreen({Key? key}) : super(key: key);
@@ -176,11 +177,24 @@ class _TDEEScreenState extends State<TDEEScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+                      ElevatedButton(
+                        onPressed: () {
+                          _saveResult('BMI', _tdeeResult.toString());
+                        },
+                        child: const Text('Lưu'),
+                      ),
                     ],
                   ),
               ],
             ),
           ),
         ));
+  }
+
+  void _saveResult(String type, String result) async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'results';
+    final value = '$type|$result|${DateTime.now()}';
+    prefs.setStringList(key, [...prefs.getStringList(key) ?? [], value]);
   }
 }

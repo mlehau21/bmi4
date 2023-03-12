@@ -59,7 +59,7 @@ class AppDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => HistoryScreen()));
+                    MaterialPageRoute(builder: (context) => HistoryPage()));
               })
         ],
       ));
