@@ -43,6 +43,7 @@ class _HistoryPageState extends State<HistoryPage> {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
       _results = prefs.getStringList('results') ?? [];
+      _results.sort((a, b) => b.split('|')[2].compareTo(a.split('|')[2]));
     });
   }
 }
