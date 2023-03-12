@@ -23,8 +23,9 @@ class _HistoryPageState extends State<HistoryPage> {
       appBar: AppBar(
         title: const Text('Lịch sử tính toán'),
       ),
-      body: ListView.builder(
+      body: ListView.separated(
         itemCount: _results.length,
+        separatorBuilder: (BuildContext context, int index) => Divider(),
         itemBuilder: (BuildContext context, int index) {
           final parts = _results[index].split('|');
           final type = parts[0];
@@ -33,7 +34,7 @@ class _HistoryPageState extends State<HistoryPage> {
           return Dismissible(
             background: Container(
               color: Colors.red,
-              child: Icon(Icons.delete, color: Colors.white),
+              child: Icon(Icons.delete, color: Colors.blue),
               alignment: Alignment.centerRight,
               padding: EdgeInsets.only(right: 20),
             ),
