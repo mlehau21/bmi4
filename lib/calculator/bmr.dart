@@ -24,78 +24,153 @@ class _BMRScreenState extends State<BMRScreen> {
       appBar: AppBar(
         title: Text('BMR Calculator'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Radio(
-                value: 1,
-                groupValue: _gender,
-                onChanged: (value) {
+              SizedBox(height: 16),
+              Text(
+                'Giới tính',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 8),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _gender = 1;
+                        });
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: _gender == 1 ? Colors.green : Colors.grey[300],
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        child: Center(
+                          child: Text(
+                            'Nam',
+                            style: TextStyle(
+                              color: _gender == 1 ? Colors.white : Colors.black,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 16),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _gender = 2;
+                        });
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: _gender == 2 ? Colors.pink : Colors.grey[300],
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        child: Center(
+                          child: Text(
+                            'Nữ',
+                            style: TextStyle(
+                              color: _gender == 2 ? Colors.white : Colors.black,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 16),
+              Text(
+                'Chiều cao (cm)',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 8),
+              TextField(
+                controller: _heightController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Vui lòng nhập chiều cao',
+                  prefixIcon: Icon(Icons.height),
+                ),
+              ),
+              SizedBox(height: 16),
+              Text(
+                'Cân nặng (kg)',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 8),
+              TextField(
+                controller: _weightController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Vui lòng nhập cân nặng',
+                  prefixIcon: Icon(Icons.line_weight),
+                ),
+              ),
+              SizedBox(height: 16),
+              Text(
+                'Tuổi',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 8),
+              TextField(
+                controller: _ageController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Vui lòng nhập tuổi',
+                  prefixIcon: Icon(Icons.person_outline),
+                ),
+              ),
+              SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
                   setState(() {
-                    _gender = value as int;
+                    double height = double.parse(_heightController.text);
+                    double weight = double.parse(_weightController.text);
+                    int age = int.parse(_ageController.text);
+                    double s = _gender == 1 ? 5 : -161;
+                    _bmrResult = 10 * weight + 6.25 * height - 5 * age + s;
                   });
                 },
+                child: Text('Tính BMR'),
               ),
-              Text('Nam'),
-              Radio(
-                value: 2,
-                groupValue: _gender,
-                onChanged: (value) {
-                  setState(() {
-                    _gender = value as int;
-                  });
+              SizedBox(height: 16),
+              Text(
+                'Chỉ số BMR của bạn là:',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 8),
+              Text(
+                '${_bmrResult.toStringAsFixed(2)}',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  _saveResult('BMR', _bmrResult.toStringAsFixed(2).toString());
                 },
+                child: const Text('Lưu kết quả'),
               ),
-              Text('Nữ'),
             ],
           ),
-          TextField(
-            controller: _heightController,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              labelText: 'Chiều cao (cm)',
-            ),
-          ),
-          TextField(
-            controller: _weightController,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              labelText: 'Cân nặng (kg)',
-            ),
-          ),
-          TextField(
-            controller: _ageController,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              labelText: 'Tuổi',
-            ),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                double height = double.parse(_heightController.text);
-                double weight = double.parse(_weightController.text);
-                int age = int.parse(_ageController.text);
-                double s = _gender == 1 ? 5 : -161;
-                _bmrResult = 10 * weight + 6.25 * height - 5 * age + s;
-              });
-            },
-            child: Text('Tính BMR'),
-          ),
-          Text(
-            'Chỉ số BMR của bạn là: ${_bmrResult.toStringAsFixed(2)}',
-            style: TextStyle(fontSize: 24),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              _saveResult('BMR', _bmrResult.toStringAsFixed(2).toString());
-            },
-            child: const Text('Lưu'),
-          ),
-        ],
+        ),
       ),
       drawer: const AppDrawer(),
     );
@@ -108,7 +183,7 @@ class _BMRScreenState extends State<BMRScreen> {
     prefs.setStringList(key, [...prefs.getStringList(key) ?? [], value]);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Đã lưu'),
+        content: Text('Đã lưu kết quả'),
         duration: Duration(milliseconds: 1500),
       ),
     );

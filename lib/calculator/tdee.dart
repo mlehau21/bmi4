@@ -18,21 +18,26 @@ class _TDEEScreenState extends State<TDEEScreen> {
   double _tdeeResult = 0;
   bool _isMale = true;
   double _activityLevel = 1.2;
-  String _selectedActivityLevel = 'Ít vận động';
+  // String _selectedActivityLevel = 'Ít vận động';
 
-  List<String> _activityLevels = [
-    'Ít vận động',
-    'Vận động nhẹ',
-    'Vận động vừa',
-    'Vận động nhiều',
-    'Vận động cực nhiều',
-  ];
+  // List<String> _activityLevels = [
+  //   'Ít vận động',
+  //   'Vận động nhẹ',
+  //   'Vận động vừa',
+  //   'Vận động nhiều',
+  //   'Vận động cực nhiều',
+  //   // 'Sedentary',
+  //   // 'Lightly Active',
+  //   // 'Moderately Active',
+  //   // 'Very Active',
+  //   // 'Extremely Active',
+  // ];
 
   void _calculateTDEE() {
     final weight = double.parse(_weightController.text);
     final height = double.parse(_heightController.text);
     final age = double.parse(_ageController.text);
-
+    final level = _activityLevel;
     double bmr;
 
     if (_isMale) {
@@ -41,25 +46,7 @@ class _TDEEScreenState extends State<TDEEScreen> {
       bmr = (10 * weight) + (6.25 * height) - (5 * age) - 161;
     }
 
-    switch (_selectedActivityLevel) {
-      case 'Ít vận động':
-        _activityLevel = 1.2;
-        break;
-      case 'Vận động nhẹ':
-        _activityLevel = 1.375;
-        break;
-      case 'Vận động vừa':
-        _activityLevel = 1.55;
-        break;
-      case 'Vận động nhiều':
-        _activityLevel = 1.725;
-        break;
-      case 'Vận động cực nhiều':
-        _activityLevel = 1.9;
-        break;
-    }
-
-    _tdeeResult = bmr * _activityLevel;
+    _tdeeResult = bmr * level;
 
     setState(() {});
   }
@@ -77,76 +64,148 @@ class _TDEEScreenState extends State<TDEEScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                TextField(
-                  controller: _weightController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(labelText: 'Weight (kg)'),
+                SizedBox(height: 16),
+                Text(
+                  'Giới tính',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 10),
-                TextField(
-                  controller: _heightController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(labelText: 'Height (cm)'),
-                ),
-                SizedBox(height: 10),
-                TextField(
-                  controller: _ageController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(labelText: 'Age (years)'),
-                ),
-                SizedBox(height: 10),
-                Text('Gender:'),
+                SizedBox(height: 8),
                 Row(
                   children: [
                     Expanded(
-                      child: RadioListTile(
-                        title: Text('Male'),
-                        value: true,
-                        groupValue: _isMale,
-                        onChanged: (value) {
+                      child: GestureDetector(
+                        onTap: () {
                           setState(() {
-                            _isMale = value!;
+                            _isMale = true;
                           });
                         },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: _isMale == true
+                                ? Colors.green
+                                : Colors.grey[300],
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          child: Center(
+                            child: Text(
+                              'Nam',
+                              style: TextStyle(
+                                color: _isMale == true
+                                    ? Colors.white
+                                    : Colors.black,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
+                    SizedBox(width: 16),
                     Expanded(
-                      child: RadioListTile(
-                        title: Text('Female'),
-                        value: false,
-                        groupValue: _isMale,
-                        onChanged: (value) {
+                      child: GestureDetector(
+                        onTap: () {
                           setState(() {
-                            _isMale = value!;
+                            _isMale = false;
                           });
                         },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: _isMale == false
+                                ? Colors.pink
+                                : Colors.grey[300],
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          child: Center(
+                            child: Text(
+                              'Nữ',
+                              style: TextStyle(
+                                color: _isMale == false
+                                    ? Colors.white
+                                    : Colors.black,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 10),
-                Text('Physical Activity Level:'),
+                SizedBox(height: 16),
+                Text(
+                  'Chiều cao (cm)',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 8),
+                TextField(
+                  controller: _heightController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Vui lòng nhập chiều cao',
+                    prefixIcon: Icon(Icons.height),
+                  ),
+                ),
+                SizedBox(height: 16),
+                Text(
+                  'Cân nặng (kg)',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 8),
+                TextField(
+                  controller: _weightController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Vui lòng nhập cân nặng',
+                    prefixIcon: Icon(Icons.line_weight),
+                  ),
+                ),
+                SizedBox(height: 16),
+                Text(
+                  'Tuổi',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 8),
+                TextField(
+                  controller: _ageController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Vui lòng nhập tuổi',
+                    prefixIcon: Icon(Icons.person_outline),
+                  ),
+                ),
+                SizedBox(height: 16),
+                Text(
+                  'Mức vận động',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
                 DropdownButton(
                   value: _activityLevel,
                   items: [
                     DropdownMenuItem(
-                      child: Text('Sedentary'),
+                      child: Text('Ít vận động'),
                       value: 1.2,
                     ),
                     DropdownMenuItem(
-                      child: Text('Lightly Active'),
+                      child: Text('Vận động nhẹ'),
                       value: 1.375,
                     ),
                     DropdownMenuItem(
-                      child: Text('Moderately Active'),
+                      child: Text('Vận động vừa'),
                       value: 1.55,
                     ),
                     DropdownMenuItem(
-                      child: Text('Very Active'),
+                      child: Text('Vận động nhiều'),
                       value: 1.725,
                     ),
                     DropdownMenuItem(
-                      child: Text('Extremely Active'),
+                      child: Text('Vận động cực nhiều'),
                       value: 1.9,
                     ),
                   ],
@@ -159,15 +218,17 @@ class _TDEEScreenState extends State<TDEEScreen> {
                 SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: _calculateTDEE,
-                  child: Text('Calculate'),
+                  child: Text('Tính TDEE'),
                 ),
                 SizedBox(height: 20),
                 if (_tdeeResult != null)
                   Column(
                     children: [
+                      SizedBox(height: 16),
                       Text(
-                        'Your TDEE is:',
-                        style: TextStyle(fontSize: 20),
+                        'Chỉ số TDEE của bạn là:',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 10),
                       Text(

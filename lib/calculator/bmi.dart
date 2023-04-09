@@ -30,25 +30,25 @@ class _BMIScreenState extends State<BMIScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(height: 20),
-            Text(
-              'BMI Calculator',
-              style: TextStyle(
-                color: Colors.black87,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Calculate your BMI',
-              style: TextStyle(
-                color: Colors.grey.shade700,
-                fontSize: 16,
-              ),
-              textAlign: TextAlign.center,
-            ),
+            // SizedBox(height: 20),
+            // Text(
+            //   'BMI Calculator',
+            //   style: TextStyle(
+            //     color: Colors.black87,
+            //     fontSize: 24,
+            //     fontWeight: FontWeight.bold,
+            //   ),
+            //   textAlign: TextAlign.center,
+            // ),
+            // SizedBox(height: 20),
+            // Text(
+            //   'Calculate your BMI',
+            //   style: TextStyle(
+            //     color: Colors.grey.shade700,
+            //     fontSize: 16,
+            //   ),
+            //   textAlign: TextAlign.center,
+            // ),
             SizedBox(height: 20),
             TextField(
               controller: _heightController,
