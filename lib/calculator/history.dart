@@ -52,6 +52,7 @@ class _HistoryPageState extends State<HistoryPage> {
           );
         },
       ),
+      drawer: const AppDrawer(),
     );
   }
 
