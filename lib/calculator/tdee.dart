@@ -64,6 +64,15 @@ class _TDEEScreenState extends State<TDEEScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                SizedBox(height: 5),
+                Text(
+                  'TDEE là tổng lượng calo một người tiêu thụ trong một ngày để duy trì các hoạt động của cơ thể.',
+                  style: TextStyle(
+                    color: Colors.grey.shade700,
+                    fontSize: 16,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
                 SizedBox(height: 16),
                 Text(
                   'Giới tính',
@@ -146,7 +155,7 @@ class _TDEEScreenState extends State<TDEEScreen> {
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    hintText: 'Vui lòng nhập chiều cao',
+                    hintText: 'Vui lòng nhập chiều cao theo centimet',
                     prefixIcon: Icon(Icons.height),
                   ),
                 ),
@@ -161,7 +170,7 @@ class _TDEEScreenState extends State<TDEEScreen> {
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    hintText: 'Vui lòng nhập cân nặng',
+                    hintText: 'Vui lòng nhập cân nặng theo kilogram',
                     prefixIcon: Icon(Icons.line_weight),
                   ),
                 ),

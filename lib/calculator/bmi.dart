@@ -40,21 +40,26 @@ class _BMIScreenState extends State<BMIScreen> {
             //   ),
             //   textAlign: TextAlign.center,
             // ),
-            // SizedBox(height: 20),
-            // Text(
-            //   'Calculate your BMI',
-            //   style: TextStyle(
-            //     color: Colors.grey.shade700,
-            //     fontSize: 16,
-            //   ),
-            //   textAlign: TextAlign.center,
-            // ),
+            SizedBox(height: 5),
+            Text(
+              'BMI là chỉ số khối cơ thể để đánh giá mức độ thích hợp của cân nặng so với chiều cao của một người.',
+              style: TextStyle(
+                color: Colors.grey.shade700,
+                fontSize: 16,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Chiều cao (cm)',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
             SizedBox(height: 20),
             TextField(
               controller: _heightController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                labelText: 'Chiều cao (cm)',
+                labelText: 'Vui lòng nhập chiều cao theo centimet',
                 labelStyle: TextStyle(
                   fontSize: 16,
                 ),
@@ -62,11 +67,16 @@ class _BMIScreenState extends State<BMIScreen> {
               ),
             ),
             SizedBox(height: 16),
+            Text(
+              'Cân nặng (kg)',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 16),
             TextField(
               controller: _weightController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                labelText: 'Cân nặng (kg)',
+                labelText: 'Vui lòng nhập cân nặng theo kilogram',
                 labelStyle: TextStyle(
                   fontSize: 16,
                 ),

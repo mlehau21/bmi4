@@ -30,6 +30,15 @@ class _BMRScreenState extends State<BMRScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              SizedBox(height: 5),
+              Text(
+                'BMR là lượng calo cần thiết để duy trì các hoạt động cơ bản của cơ thể trong trạng thái nghỉ ngơi, không tính đến hoạt động vận động.',
+                style: TextStyle(
+                  color: Colors.grey.shade700,
+                  fontSize: 16,
+                ),
+                textAlign: TextAlign.center,
+              ),
               SizedBox(height: 16),
               Text(
                 'Giới tính',
@@ -104,7 +113,7 @@ class _BMRScreenState extends State<BMRScreen> {
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: 'Vui lòng nhập chiều cao',
+                  hintText: 'Vui lòng nhập chiều cao theo centimet',
                   prefixIcon: Icon(Icons.height),
                 ),
               ),
@@ -119,7 +128,7 @@ class _BMRScreenState extends State<BMRScreen> {
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: 'Vui lòng nhập cân nặng',
+                  hintText: 'Vui lòng nhập cân nặng kilogram',
                   prefixIcon: Icon(Icons.line_weight),
                 ),
               ),
